@@ -1,0 +1,13 @@
+[Unit]
+Description=kafka 
+After=network.target remote-fs.target nss-lookup.target zookeeper.service
+
+[Service]
+Type=forking
+Environment=JAVA_HOME=/usr/local/jdk  
+ExecStart=/usr/local/kafka/bin/kafka-server-start.sh -daemon /usr/local/kafka/config/server.properties
+ExecStop=/usr/local/kafka/bin/kafka-server-stop.sh
+#PrivateTmp=true
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
